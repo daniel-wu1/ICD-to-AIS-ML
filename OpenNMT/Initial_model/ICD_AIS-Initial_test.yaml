@@ -1,0 +1,35 @@
+# ICD_AIS-Initial_test.yaml
+
+## Where the samples will be written
+save_data: run/init_model
+## Where the vocab(s) will be written
+src_vocab: run/init_model.vocab.icd
+tgt_vocab: run/init_model.vocab.ais
+# Prevent overwriting existing files in the folder
+overwrite: True
+
+# Corpus opts:
+data:
+    corpus_1:
+        path_src: ../../Data/train_icd_pre_I9_A05.csv
+        path_tgt: ../../Data/train_ais_pre_I9_A05.csv
+    valid:
+        path_src: ../../Data/val_icd_pre_I9_A05.csv
+        path_tgt: ../../Data/val_ais_pre_I9_A05.csv
+        
+# Vocabulary files that were just created
+src_vocab: run/init_model.vocab.icd
+tgt_vocab: run/init_model.vocab.ais
+
+# Train on a single GPU
+world_size: 1
+gpu_ranks: [0]
+
+# stopping criteria
+early_stopping: 4
+
+# Where to save the checkpoints
+save_model: run/model
+save_checkpoint_steps: 500
+#train_steps: 1000
+valid_steps: 500
