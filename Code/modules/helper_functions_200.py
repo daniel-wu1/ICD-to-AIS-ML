@@ -398,11 +398,8 @@ def display_attn(attn_df, showmat=True, colorbar=True, d_only=False):
     
     
 def icd_mat(mat, icd_version=9):
-    
     icd_codes = mat.columns[1:]
-    
     print(icd_codes)
-
     return icd_to_text(icd_codes)
     
     
@@ -420,33 +417,23 @@ def icd_to_text(icd_list, icd_version=9):
     
     # loop through all codes
     for code in icd_list:
-        
         # check version of ICD
         if icd_version==9:
-            
             # remove prefix from non-E/P codes
             if (code[0] == 'E') or (code[0] == 'P'):
-                
                 icd_trans = icd9cms.search(code)
             else:
-                
                 icd_trans = icd9cms.search(code[1:])
-            
             # check if not valid code
             if icd_trans == None:
-                
                 icd_txt.append(code + ': code not found')
                 
             else:
-                
                 # if no long description use short description
                 if icd_trans.long_desc == None:
-                    
                     icd_txt.append(code + ": " + icd_trans.short_desc)
-                    
                 else:
                     icd_txt.append(code + ": " + icd_trans.long_desc)
-    
     return icd_txt
 
 
